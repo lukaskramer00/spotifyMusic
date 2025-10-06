@@ -25,8 +25,6 @@ def analyze_song_amount_per_date(song_data):
     return dict(date_counter)
 
 
-
-
 def plot_song_amount_per_date(dates: dict):
     dates = dict(sorted(dates.items()))
     if not dates:
@@ -49,7 +47,6 @@ def plot_song_amount_per_date(dates: dict):
 
     plt.figure(figsize=(9, 30))
     plt.barh(df["Date"], df["Song Count"], color=bar_colors, height=0.8)
-
     plt.xlabel("Number of Songs Added")
     plt.ylabel("Dates")
     plt.yticks(range(len(df["Date"])), df["Date"])

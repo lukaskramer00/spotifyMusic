@@ -39,6 +39,7 @@ def plot_top_artists(top_artists):
     plt.savefig('plots/top_artists.png')
     plt.show()
 
+
 if __name__ == "__main__":
     json_reader = JsonReader('dataFiles/Playlist1.json')
     top_artists = analyze_top_artists(json_reader, top_n=10)
