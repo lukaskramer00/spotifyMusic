@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from jsonReader import JsonReader
 import os
 
-def analyze_top_artists(json_reader, top_n=5):
+def analyze_top_artists(json_reader, top_n: int):
     data = json_reader.get_data()
 
     if not data:
@@ -28,7 +28,7 @@ def plot_top_artists(top_artists):
     names, counts = zip(*top_artists)
 
     plt.figure(figsize=(10, 6))
-    plt.bar(names, counts, color='skyblue')
+    plt.bar(names, counts, color='green')
     plt.xlabel('Artists')
     plt.ylabel('Number of Appearances')
     plt.title('Top Artists in Playlists')
@@ -41,6 +41,6 @@ def plot_top_artists(top_artists):
 
 if __name__ == "__main__":
     json_reader = JsonReader('dataFiles/Playlist1.json')
-    top_artists = analyze_top_artists(json_reader, top_n=5)
+    top_artists = analyze_top_artists(json_reader, top_n=10)
     print(f"Found {len(top_artists)} top artists: {top_artists}.")
     plot_top_artists(top_artists)
