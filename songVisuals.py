@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import os
 from collections import defaultdict
 from jsonReader import JsonReader
+from datetime import datetime
 
 
 
@@ -14,9 +15,10 @@ def analyze_song_amount_per_date(song_data):
     date_counter = defaultdict(int)
     for playlist in data['playlists']:
         for item in playlist.get('items', []):
-            date = item.get('addedDate')
-            if date:
-                date_counter[date] += 1
+            date = datetime.strptime(item.get('addedDate'), "%Y-%m-%d")
+            date_month_convertion = date.strftime("%Y-%m")
+            if date_month_convertion:
+                date_counter[date_month_convertion] += 1
 
     print(date_counter)
     return dict(date_counter)
