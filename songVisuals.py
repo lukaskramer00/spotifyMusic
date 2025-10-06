@@ -3,6 +3,7 @@ import os
 from collections import defaultdict
 from jsonReader import JsonReader
 from datetime import datetime
+import pandas as pd
 
 
 
@@ -32,14 +33,26 @@ def plot_song_amount_per_date(dates: dict):
         print("No date data to plot.")
         return
 
-    x_values = list(dates.values())
-    y_values = list(dates.keys())
+    df = pd.DataFrame(list(dates.items()), columns=['Date', 'Song Count'])
+    df["year"] = df["Date"].str[:4]
+
+    colors = {
+        "2020": "red",
+        "2021": "blue",
+        "2022": "green",
+        "2023": "purple",
+        "2024": "orange",
+        "2025": "brown",
+    }
+
+    bar_colors = df["year"].map(colors)
 
     plt.figure(figsize=(9, 30))
-    plt.barh(range(len(y_values)), x_values, color="green", height=0.8)
+    plt.barh(df["Date"], df["Song Count"], color=bar_colors, height=0.8)
+
     plt.xlabel("Number of Songs Added")
     plt.ylabel("Dates")
-    plt.yticks(range(len(y_values)), y_values)
+    plt.yticks(range(len(df["Date"])), df["Date"])
     plt.xticks(rotation=90)
     plt.tight_layout()
 
